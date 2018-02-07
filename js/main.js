@@ -65,10 +65,22 @@ function getTokenMetadata(tokenId) {
 }
 
 function updateTokenInfo(netId) {
-  if (netId == 3)
-    tokenizatorAddress = "0x5251F45C90D79112388993EbC45d9583A060f9F5";
 
   $("#tokenizatorAddress").html("Contract  Address: <strong>"+tokenizatorAddress+"</strong>");
+
+  if (netId == 3)
+    $("#tokenTimelock").html(
+      "Token Timelock: <strong>No timelock in testnet</strong>"
+    );
+  else
+    getLockTimestamp().then(function(response) {
+      console.log('Lock timestamp:', Number(response.result));
+      $("#tokenTimelock").html(
+        "Token Timelock: <strong>"+new Date(Number(response.result)*1000).toLocaleString()+"</strong>"
+      );
+      $("#tokenTimelock").show();
+    });
+
   $("#totalTokens").show();
   getTotalSupply().then(function(response) {
     console.log('Total supply:', (Number(response.result)));
@@ -77,13 +89,6 @@ function updateTokenInfo(netId) {
     loadTokens(Number(response.result));
   });
 
-  getLockTimestamp().then(function(response) {
-    console.log('Lock timestamp:', Number(response.result));
-    $("#tokenTimelock").html(
-      "Token Timelock: <strong>"+new Date(Number(response.result)*1000).toLocaleString()+"</strong>"
-    );
-    $("#tokenTimelock").show();
-  });
 }
 
 function loadTokens(totalTokens) {
@@ -179,6 +184,7 @@ window.addEventListener("load", function() {
 });
 
 function switchNetwork() {
+  $("#tokenList").html("");
   if (tokenizatorAddress == "0x6a190eef45f589373a463AFb3B90493E696c45e2") {
     tokenizatorAddress = "0x5251F45C90D79112388993EbC45d9583A060f9F5";
     etherscanPrefix = "ropsten";
