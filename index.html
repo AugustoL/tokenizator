@@ -1,0 +1,78 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tokenizator</title>
+  <meta name="description" content="Awesome tokenizator website">
+  <meta name="author" content="Augusto Lemble <me@augustolemble.com>">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+      <div class="py-5 text-center">
+        <h1>Tokenizator</h1>
+        <p class="lead">The Tokenizator smart contract allows the creation of one unique token per day, the tokens are ERC721 compatible.</p>
+        <h4 id="tokenizatorAddress"></h4>
+        <h5 id="switchNetwork" onclick="switchNetwork()"><button class="btn btn-sm btn-link">Swicth to Testnet</button></h5>
+        <div class="row justify-content-around">
+          <h5 id="totalTokens" class="hidden"></h5>
+          <h5 id="tokenTimelock" class="hidden"></h5>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Tokens</span>
+          </h4>
+          <ul class="list-group mb-3" id="tokenList">
+          </ul>
+        </div>
+        <div class="col-md-8 order-md-1 hidden" id="tokenActions">
+          <h4 class="mb-3">Create Token</h4>
+          <form class="needs-validation" novalidate>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="tokenName">Token Name <small>Max Length 32</small></label>
+                <input type="text" class="form-control" id="tokenName" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="tokenImage">Token Image <small>(Base64 code of 32x32px png)</small></label>
+                <input type="text" class="form-control" id="tokenImage" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="tokenDescription">Token Description</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="tokenDescription" required>
+              </div>
+            </div>
+            <hr class="mb-4">
+            <p id="txData"></p>
+            <div class="row">
+              <div class="col-md-6">
+                <button class="btn btn-primary btn-block" type="button" onclick="createToken()">Create Token</button>
+              </div>
+              <div class="col-md-6">
+                <button class="btn btn-primary btn-block" type="button" onclick="getCreateTokenData()">Get TX Data</button>
+              </div>
+            </div
+          </form>
+        </div>
+      </div>
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">Created by Augusto Lemble</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="https://github.com/AugustoL">Github</a></li>
+          <li class="list-inline-item"><a href="https://twitter.com/LembleAugusto">Twitter</a></li>
+        </ul>
+      </footer>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

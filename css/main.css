@@ -1,0 +1,8 @@
+
+.hidden {
+  display: none;
+}
+
+#txData  {
+  word-break: break-all;
+}
