@@ -66,13 +66,15 @@ function getTokenMetadata(tokenId) {
 
 function updateTokenInfo(netId) {
 
-  $("#tokenizatorAddress").html("Contract  Address: <strong>"+tokenizatorAddress+"</strong>");
 
-  if (netId == 3)
+
+  if (netId == 3){
+    $("#tokenizatorAddress").html("Contract  Address: <strong><a href=\"https://ropsten.etherscan.io/address/"+tokenizatorAddress+"\">"+tokenizatorAddress+"</a></strong>");
     $("#tokenTimelock").html(
       "Token Timelock: <strong>No timelock in testnet</strong>"
     );
-  else
+  } else {
+    $("#tokenizatorAddress").html("Contract  Address: <strong><a href=\"https://etherscan.io/address/"+tokenizatorAddress+"\">"+tokenizatorAddress+"</a></strong>");
     getLockTimestamp().then(function(response) {
       console.log('Lock timestamp:', Number(response.result));
       $("#tokenTimelock").html(
@@ -80,6 +82,7 @@ function updateTokenInfo(netId) {
       );
       $("#tokenTimelock").show();
     });
+  }
 
   $("#totalTokens").show();
   getTotalSupply().then(function(response) {
