@@ -131,15 +131,16 @@ function loadTokens(totalTokens) {
       srcImg = remove_non_ascii(srcImg);
       desc = remove_non_ascii(desc);
       name = remove_non_ascii(name);
-      // console.log('Token Name', name);
-      // console.log('Token Creator', name);
-      // console.log('Token Desc', desc);
-      // console.log('Token Desc', srcImg);
       tokens[i].name = name;
       tokens[i].srcImg = srcImg;
       tokens[i].desc = desc;
       tokens[i].creator = creator;
-      $("#tokenList").append("<li class=\"list-group-item d-flex justify-content-between lh-condensed\"> <div><h6 class=\"my-0\"><img src=\""+tokens[i].srcImg+"\"> <strong>#"+tokens[i].id+"</strong> "+tokens[i].name+"</h6> Creator: <small class=\"text-muted\">"+tokens[i].creator+"</small> <br> Description: <small class=\"text-muted\">"+tokens[i].desc+"</small> </div> </li>");
+      if (etherscanPrefix != 'ropsten') {
+        tokens[i].link = '/token?tid='+t.id;
+      } else {
+        tokens[i].link = '/token?tid='+t.id+'&net=3';
+      }
+      $("#tokenList").append("<li class=\"list-group-item d-flex justify-content-between lh-condensed\"> <div><h6 class=\"my-0\"><img src=\""+tokens[i].srcImg+"\"> <strong><a href=\""+tokens[i].link+"\">#"+tokens[i].id+" "+tokens[i].name+"</strong></a></h6> Creator: <small class=\"text-muted\">"+tokens[i].creator+"</small> <br> Description: <small class=\"text-muted\">"+tokens[i].desc+"</small> </div> </li>");
     });
   })
 }
